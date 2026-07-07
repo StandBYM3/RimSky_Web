@@ -120,7 +120,7 @@
 <footer>
   <div class="horizon" aria-hidden="true"></div>
   <p>边缘天空 RimSky Craft · Minecraft Java 版 1.21.11</p>
-  <p>统计数据来自原版世界记录，定时更新。头像服务由 mc-heads.net 提供。</p>
+  <p>统计数据来自原版世界记录，定时更新。头像服务由 crafthead.net 提供。</p>
 </footer>
 
 <script src="data/zh_names.js"></script>
@@ -130,10 +130,13 @@
   "use strict";
   var FALLBACK = "data:image/svg+xml," + encodeURIComponent(
     '<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect width="56" height="56" rx="6" fill="#22304B"/><rect x="14" y="14" width="28" height="28" rx="3" fill="#4FA3FF" opacity=".55"/></svg>');
-  // 离线模式服务器: 按玩家名取头像(mc-heads 对未知名字回退 Steve, 永不碎图)。
-  // 旧版走 crafatar 按 UUID 查 -> 离线 UUID 在 Mojang 查无此人, 头像全灭。
+  // 正版服务器(已确认 UUID 为 Mojang v4): 按 UUID 直查头像——按名字查要多走一步
+  // "名字->UUID"解析, mc-heads 那一步被限流/失败时会静默回退 Steve(正版老玩家也中招)。
+  // UUID 直查跳过解析, 一步到位; 未知 UUID 仍优雅回退 Steve, 永不碎图。
+  // 供应商史: crafatar(死) -> mc-heads(名字查和UUID查都回退Steve, 而Mojang源头
+  // 实测有皮肤 -> 服务自身缓存/查询层故障) -> crafthead(现役, Cloudflare承载)。
   function avatar(p, size){
-    return "https://mc-heads.net/avatar/" + encodeURIComponent(p.name) + "/" + size;
+    return "https://crafthead.net/avatar/" + p.uuid.replace(/-/g,"") + "/" + size;
   }
   var D = window.RIMSTATS;
   if (!D || !D.players) {
