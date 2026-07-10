@@ -109,3 +109,15 @@ td:last-child{color:var(--body)}
 footer{border-top:1px solid var(--line);margin-top:56px;padding:40px 20px 56px;text-align:center;color:var(--muted);font-size:13.5px}
 footer .horizon{width:180px;height:1px;margin:0 auto 26px;background:linear-gradient(90deg,transparent,var(--sky),transparent)}
 footer p+p{margin-top:6px}
+
+/* ---- 点击复制 ---- */
+[data-copy]{cursor:pointer}
+.addr[data-copy]{transition:border-color .15s}
+.addr[data-copy]:hover{border-color:var(--sky)}
+.addr[data-copy]:focus-visible,.copyline[data-copy]:focus-visible{outline:2px solid var(--dawn);outline-offset:3px;border-radius:8px}
+.cico{width:14px;height:14px;margin-left:8px;vertical-align:-1px;color:var(--muted)}
+.addr[data-copy]:hover .cico,.copyline[data-copy]:hover .cico,.cbtn:hover .cico{color:var(--sky)}
+.copied small,.copied .chint{color:var(--dawn)!important}
+.copied .cico{color:var(--dawn)}
+.chint{display:block;color:var(--muted);font-size:12px;letter-spacing:.15em;margin-top:3px}
+.cbtn{background:none;border:none;padding:0 0 0 8px;cursor:pointer;color:var(--muted);vertical-align:-1px}
